@@ -165,13 +165,54 @@ void ascii7(void)
         "                    |___/                       \n"
     );
 };
+void choice1loop(void)
+{
+    int choice1 = 0;
+    char buffer[1024];
+    int _getch(void); // return no error call for _getch
 
-int main(int argc, char **argv)
+    for (;;)
+    {
+        // Used to stop infinite loop when char input into scanf_s
+        char* str = fgets(buffer, sizeof(buffer), stdin);
+        if (str == NULL) { /* error - handle it */ }
+
+        char* end;
+        long num = strtol(str, &end, 10);
+        if (str == end) { /* error - handle it */ }
+
+        // main choice area, 1 to continue onward, 2 to fail and retry choice, anything else to error.
+        printf("\nYou have a choice now. Will you... 1. Go out and attempt to save the town?. 2. Go back to sleep...\n");
+        scanf_s("%d", &choice1);
+        system("cls");
+
+        if (choice1 == 1) // Choice that allows user to break from this loop to continue story
+        {
+            break; // breaks out of loop
+        }
+
+        else if (choice1 == 2) // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nYou go back to bed. The monsters overrun the city and you have died...\n");
+            printf("\nYou have failed. Hit any key to return to last choice.\n");
+            _getch();
+            system("cls");
+        }
+
+        else // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nNot a valid choice, try again\n");
+            _getch();
+            system("cls");
+        }
+    }
+}
+
+int main(int argc, char** argv)
 {
     char fn[100]; // Character array to hold a users first name
     char dn[100]; // Character array to hold the dungeons name
     char buffer[1024]; // Char buffer for loops
-    int choice1 = 0; // First story choice
     int choice2 = 0; // Second story choice
     int choice3 = 0; // Third story choice
     int choice4 = 0; // Fourth story choice
@@ -183,25 +224,25 @@ int main(int argc, char **argv)
     {
         // Prompt from stdin for a users name
         printf(PROMPT_MSG);
-        scanf_s("%s", fn, 100); // First name input
+        scanf_s("%s", fn, 100); // First name input 
 
         // Prompt from stdin for the dungeon name and clear screen after both user input
         printf(PROMPT_MSGD);
-        scanf_s("%s", dn, 100); // Dungeon name input
+        scanf_s("%s", dn, 100); // Dungeon name input 
 
         // Waits for user input to continue and then clears the screen
         printf("\nPress any key to Continue...\n");
         _getch(); // user input
         system("cls"); // clear screen
 
-        // Print the users name using stdout & Basic dialogue with the dungeon name. Wait for user input to continue.
+        // Further dialogue pushing the story forward
         printf("\nYou rudely awaken from your slumber and notice someone standing above you.\n");
         printf("\nThey are shaking you harshly in an attempt to wake you up and get your attention. It is the town eldar known as Zylo!\n");
         printf("\nPress any key to Continue...\n");
         _getch();
         system("cls");
 
-        //further dialogue pushing the story forward
+        // Print the users name using stdout & Basic dialogue with the dungeon name. Wait for user input to continue.
         printf("\nZylo: Wake up!!! the town alarm is going off and we need your help %s!\n", fn);
         printf("\nZylo: The dungeon %s just outside the town is being overrun by monsters and they are starting to come into the city now!\n", dn);
         printf("\nZylo: We need your help to stop them... Please grab your weapon and get to the front of %s as soon as possible!\n", dn);
@@ -219,42 +260,8 @@ int main(int argc, char **argv)
         system("cls");
 
         // Loop to require user input to pick between choices presented. Other input not allowed.
-        for (;;)
-        {
-            // Used to stop infinite loop when char input into scanf_s
-            char* str = fgets(buffer, sizeof(buffer), stdin);
-            if (str == NULL) { /* error - handle it */ }
+        choice1loop();
 
-            char* end;
-            long num = strtol(str, &end, 10);
-            if (str == end) { /* error - handle it */ }
-
-            // main choice area, 1 to continue onward, 2 to fail and retry choice, anything else to error.
-            printf("\nYou have a choice now %s. Will you... 1. Go out and attempt to save the town?. 2. Go back to sleep...\n", fn);
-            scanf_s("%d", &choice1);
-            system("cls");
-
-            if (choice1 == 1) // Choice that allows user to break from this loop to continue story
-            {
-                break; // breaks out of loop
-            }
-
-            else if (choice1 == 2) // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nYou go back to bed. The monsters overrun the city and you have died...\n");
-                printf("\nYou have failed. Hit any key to return to last choice.\n");
-                _getch();
-                system("cls");
-            }
-
-            else // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nNot a valid choice, try again\n");
-                _getch();
-                system("cls");
-            }
-        }
-        
         //further dialogue pushing the story forward
         printf("\nyou continue onward...\n");
         printf("\nPress any key to Continue...\n");
@@ -267,7 +274,7 @@ int main(int argc, char **argv)
         printf("\nPress any key to Continue...\n");
         _getch();
         system("cls");
-    
+
         printf("\nOnce you are inside the dungeon, you notice a pungent smell. It is very hard to see inside the dimly lit dungeon, but you make out the faint image of what looks like a person.\n");
         printf("\nAs you approach it slowly, you quickly realize that they are not what they seem... \n");
         printf("\nPress any key to Continue...\n");
@@ -278,7 +285,7 @@ int main(int argc, char **argv)
         printf("\nPress any key to Continue...\n");
         _getch();
         system("cls");
-        
+
         //ASCII art using puts()
         ascii2();
 
@@ -370,7 +377,7 @@ int main(int argc, char **argv)
         printf("\nPress any key to Continue...\n");
         _getch();
         system("cls");
-        
+
         // Loop to require user input to pick between choices presented. Other input not allowed.
         for (;;)
         {
@@ -386,35 +393,35 @@ int main(int argc, char **argv)
             ascii4();
 
 
-           printf("\nYou see a skull shaped switch that may belong to this suspicious gate. Do you 1. Press the switch? 2. Ignore the switch?\n");
-           scanf_s("%d", &choice3);
-           system("cls");
+            printf("\nYou see a skull shaped switch that may belong to this suspicious gate. Do you 1. Press the switch? 2. Ignore the switch?\n");
+            scanf_s("%d", &choice3);
+            system("cls");
 
-           if (choice3 == 1) // Choice that forces user to restart from beginning of this loop
-           {
-               printf("\nYou press the switch and hear what sounds to be many mechanisms moving behind the door.\n");
-               printf("\nThe door violently swings open and several dozen arrows are launched from within the doorway.\n");
-               printf("\nYou have suffered catastrophic wounds at the hands of these arrows.\n");
-               printf("\nYou have failed. Hit any key to return to last choice.\n");
-               _getch();
-               system("cls");
-           }
+            if (choice3 == 1) // Choice that forces user to restart from beginning of this loop
+            {
+                printf("\nYou press the switch and hear what sounds to be many mechanisms moving behind the door.\n");
+                printf("\nThe door violently swings open and several dozen arrows are launched from within the doorway.\n");
+                printf("\nYou have suffered catastrophic wounds at the hands of these arrows.\n");
+                printf("\nYou have failed. Hit any key to return to last choice.\n");
+                _getch();
+                system("cls");
+            }
 
-           else if (choice3 == 2) // Choice that allows user to break from this loop to continue story
-           {
-               printf("\nYou decide to ignore the suspicious switch and carry on through the open doorway \n");
-               printf("\nPress any key to Continue...\n");
-               _getch();
-               system("cls");
-               break;
-           }
+            else if (choice3 == 2) // Choice that allows user to break from this loop to continue story
+            {
+                printf("\nYou decide to ignore the suspicious switch and carry on through the open doorway \n");
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+                break;
+            }
 
-           else // Choice that forces user to restart from beginning of this loop
-           {
-               printf("\nNot a valid choice, try again\n");
-               _getch();
-               system("cls");
-           }
+            else // Choice that forces user to restart from beginning of this loop
+            {
+                printf("\nNot a valid choice, try again\n");
+                _getch();
+                system("cls");
+            }
         }
 
         //further dialogue pushing the story forward
