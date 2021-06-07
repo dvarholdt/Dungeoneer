@@ -208,7 +208,7 @@ void choice1loop(void)
     }
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     char fn[100]; // Character array to hold a users first name
     char dn[100]; // Character array to hold the dungeons name
@@ -261,7 +261,7 @@ int main(int argc, char** argv)
 
         // Loop to require user input to pick between choices presented. Other input not allowed.
         choice1loop();
-
+        
         //further dialogue pushing the story forward
         printf("\nyou continue onward...\n");
         printf("\nPress any key to Continue...\n");
