@@ -209,11 +209,12 @@ void choice1loop(void)
     }
 }
 
-union Money {
-    int coins;
-    int jobs;
-    int intelligence;
-} money;
+// Union for "money" used in loop
+union Money { 
+    int coins; 
+    int jobs; 
+    int intelligence; 
+} money; 
 
 int main(void)
 {
@@ -221,14 +222,14 @@ int main(void)
     char buffer[1024]; // Char buffer for loops
     int choice2, choice3, choice4, choiceexit = 0; // Story choices 
     int _getch(); // return no error call for _getch
-    money.coins = 0;
-    money.jobs = 0;
-    money.intelligence = 0;
+    money.coins = 0; // for use in money union 
+    money.jobs = 0; // for use in money union 
+    money.intelligence = 0; // for use in money union 
 
-    time_t s, val = 1;
-    struct tm* current_time;
-    s = time(NULL);
-    current_time = localtime(&s);
+    time_t s, val = 1; 
+    struct tm* current_time; // tm struct for time display
+    s = time(NULL); 
+    current_time = localtime(&s); 
 
     // Main loop of the story, once something happens that causes the story to end, restarts from this point 
     for (;;)
@@ -246,7 +247,7 @@ int main(void)
         _getch(); // user input
         system("cls"); // clear screen
 
-        // Further dialogue pushing the story forward
+        // Further dialogue pushing the story forward, usage of struct to display time.
         printf("\nYou rudely awaken at the sound of someone yelling for your name.\n");
         printf("\nYou look at your clock, the time is %02d:%02d:%02d\n", current_time->tm_hour, current_time->tm_min, current_time->tm_sec);
         printf("\nSomeone is standing above you and they reach for you.\n");
