@@ -226,6 +226,7 @@ int main(void)
     money.jobs = 0; // for use in money union 
     money.intelligence = 0; // for use in money union 
 
+    // Usage of struct to display time at beginning of story
     time_t s, val = 1; 
     struct tm* current_time; // tm struct for time display
     s = time(NULL); 
