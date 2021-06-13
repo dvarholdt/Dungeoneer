@@ -14,6 +14,7 @@
 #include "Dungeon.h" // For choosing dungeon name
 #include <conio.h> // For getch() & clrscr() 
 #include <ctype.h> // For testing & mapping characters 
+#include <time.h> // To get current time
 
 void ascii1(void)
 {
@@ -169,7 +170,7 @@ void choice1loop(void)
 {
     int choice1 = 0;
     char buffer[1024];
-    int _getch(void); // return no error call for _getch
+    int _getch();
 
     for (;;)
     {
@@ -208,16 +209,26 @@ void choice1loop(void)
     }
 }
 
-int main(int argc, char** argv)
+union Money {
+    int coins;
+    int jobs;
+    int intelligence;
+} money;
+
+int main(void)
 {
-    char fn[100]; // Character array to hold a users first name
-    char dn[100]; // Character array to hold the dungeons name
+    char fn[100], dn[100]; // Character array to hold a users first name & dungeon name
     char buffer[1024]; // Char buffer for loops
-    int choice2 = 0; // Second story choice
-    int choice3 = 0; // Third story choice
-    int choice4 = 0; // Fourth story choice
-    int choiceexit = 0; // Choice to restart or exit
-    int _getch(void); // return no error call for _getch
+    int choice2, choice3, choice4, choiceexit = 0; // Story choices 
+    int _getch(); // return no error call for _getch
+    money.coins = 0;
+    money.jobs = 0;
+    money.intelligence = 0;
+
+    time_t s, val = 1;
+    struct tm* current_time;
+    s = time(NULL);
+    current_time = localtime(&s);
 
     // Main loop of the story, once something happens that causes the story to end, restarts from this point 
     for (;;)
@@ -236,8 +247,14 @@ int main(int argc, char** argv)
         system("cls"); // clear screen
 
         // Further dialogue pushing the story forward
-        printf("\nYou rudely awaken from your slumber and notice someone standing above you.\n");
-        printf("\nThey are shaking you harshly in an attempt to wake you up and get your attention. It is the town eldar known as Zylo!\n");
+        printf("\nYou rudely awaken at the sound of someone yelling for your name.\n");
+        printf("\nYou look at your clock, the time is %02d:%02d:%02d\n", current_time->tm_hour, current_time->tm_min, current_time->tm_sec);
+        printf("\nSomeone is standing above you and they reach for you.\n");
+        printf("\nPress any key to Continue...\n");
+        _getch();
+        system("cls");
+
+        printf("\nThey begin shaking you harshly in an attempt to wake you up and get your attention. It is the town eldar known as Zylo!\n");
         printf("\nPress any key to Continue...\n");
         _getch();
         system("cls");
@@ -340,7 +357,17 @@ int main(int argc, char** argv)
 
                 printf("\nYou have defeated the Goblin!!! ***Victory fanfare***\n");
                 printf("\nYou have earned the Goblins treasure that it has left behind!!!\n");
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
 
+                printf("\nUpon further inspection, you notice that the coins in the chest are all soft...\n");
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+
+                printf("\nYou take a bite into the coin to test it, and your teeth sink into the coin.\n");
+                printf("\nFor some reason it tastes alot like chocolate......\n");
                 printf("\nPress any key to Continue...\n");
                 _getch();
                 system("cls");
@@ -393,16 +420,40 @@ int main(int argc, char** argv)
             ascii4();
 
 
-            printf("\nYou see a skull shaped switch that may belong to this suspicious gate. Do you 1. Press the switch? 2. Ignore the switch?\n");
+            printf("\nYou see a skull shaped switch that may belong to this suspicious gate.\n\nIt looks like you can insert a coin into the mouth.\n\nDo you 1. Try to Insert coin? 2. Ignore the switch?\n");
             scanf_s("%d", &choice3);
             system("cls");
 
-            if (choice3 == 1) // Choice that forces user to restart from beginning of this loop
+            if (choice3 == 1) // Choice that forces user to restart from beginning of this loop, use of union
             {
-                printf("\nYou press the switch and hear what sounds to be many mechanisms moving behind the door.\n");
-                printf("\nThe door violently swings open and several dozen arrows are launched from within the doorway.\n");
-                printf("\nYou have suffered catastrophic wounds at the hands of these arrows.\n");
-                printf("\nYou have failed. Hit any key to return to last choice.\n");
+                printf("\nYou approach the switch with intent to insert a coin, but the skull speaks to you. \n");
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+
+                printf("\nSkull: I can see inside your mind. You will not be able to open this door because I know that you have no money! \n");
+                printf("\nSkull: I will now tell you about yourself! \n");
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+
+                printf("\nSkull: The amount of money that you have is %d! \n", money.coins);
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+
+                printf("\nSkull: This is because the amount of jobs that you have had in your life amounts to %d! \n", money.jobs);
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+
+                printf("\nSkull: And this is because the total IQ that you have in that skull of yours is %d! \n", money.intelligence);
+                printf("\nPress any key to Continue...\n");
+                _getch();
+                system("cls");
+
+                printf("\nNow give me real coins to open this door, or SCRAM!!! \n");
+                printf("\nPress any key to Continue...\n");
                 _getch();
                 system("cls");
             }
