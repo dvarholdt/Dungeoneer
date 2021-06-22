@@ -1,1 +1,1 @@
-#define PROMPT_MSGD "What is the name of the town dungeon that you will be exploring??: "
+#define PROMPT_MSGD "What is the name of the town dungeon that you will be exploring?? (64 characters max): "

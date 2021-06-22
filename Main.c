@@ -474,7 +474,7 @@ void choice4loop(void)
 
 int main()
 {
-    char fn[64], dn[64]; // Character array to hold a users first name & dungeon name
+    char fn[65], dn[65]; // Character array to hold a users first name & dungeon name
     char buffer[1024]; // buffer for char to stop inf loop 
     int choiceexit = 0; // Initializing final choice to 0
     int _getch(); // return no error call for _getch
@@ -494,7 +494,7 @@ int main()
 
         // If fgets has no more to read or if there is an error
         fn[sizeof fn - 1] = 'x';
-        if (fgets(fn, 64, stdin) == NULL)
+        if (fgets(fn, 65, stdin) == NULL)
         {
             return 0; 
         }
@@ -517,11 +517,11 @@ int main()
 
         // No more to read or IO error
         dn[sizeof dn - 1] = 'x';
-        if (fgets(dn, 64, stdin) == NULL) {
+        if (fgets(dn, 65, stdin) == NULL) {
             break;
         }
 
-        // If extra characters or int input, get rid of after 64 buffer length for dungeon name
+        // If extra characters or int input, get rid of extra input after buffer size reached
         if (dn[sizeof dn - 1] == '\0' && dn[sizeof dn - 2] != '\n')
         {
             int ch;
