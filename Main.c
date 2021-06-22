@@ -15,8 +15,9 @@
 #include <conio.h> // For getch() & clrscr() 
 #include <ctype.h> // For testing & mapping characters 
 #include <time.h> // To get current time
+#include <string.h> // For strlen
 
-void ascii1(void)
+void asciigear(void)
 {
     puts(
         "                                                                                \n"
@@ -44,7 +45,7 @@ void ascii1(void)
         "                                                                                \n"
     );
 };
-void ascii2(void)
+void asciimonster(void)
 {
     puts(
         "                                        \n"
@@ -68,7 +69,7 @@ void ascii2(void)
         "           .... .,,,,,,*/***,        /%%\n"
     );
 };
-void ascii3(void)
+void asciitreasure(void)
 {
     puts(
         "                            _.--.              \n"
@@ -92,7 +93,7 @@ void ascii3(void)
         "                    '-.||_|.-'                 \n"
     );
 };
-void ascii4(void)
+void asciiskull(void)
 {
     puts(
         "           ______           \n"
@@ -110,7 +111,7 @@ void ascii4(void)
         "                            \n"
     );
 };
-void ascii5(void)
+void ascii8ball(void)
 {
     puts(
         "                                  \n"
@@ -131,7 +132,7 @@ void ascii5(void)
         "                                  \n"
     );
 };
-void ascii6(void)
+void asciiexplosion(void)
 {
     puts(
         "                                        %%              %/                      \n"
@@ -153,7 +154,7 @@ void ascii6(void)
         "                               *(%/   %      #(#*                               \n"
     );
 };
-void ascii7(void)
+void asciicongrats(void)
 {
     puts(
         "                                    _           \n"
@@ -168,24 +169,20 @@ void ascii7(void)
 };
 void choice1loop(void)
 {
-    int choice1 = 0;
-    char buffer[1024];
-    int _getch();
-
     for (;;)
     {
-        // Used to stop infinite loop when char input into scanf_s
-        char* str = fgets(buffer, sizeof(buffer), stdin);
-        if (str == NULL) { /* error - handle it */ }
-
-        char* end;
-        long num = strtol(str, &end, 10);
-        if (str == end) { /* error - handle it */ }
+        int choice1 = 0;
+        char buffer[1024];
+        int _getch();
 
         // main choice area, 1 to continue onward, 2 to fail and retry choice, anything else to error.
         printf("\nYou have a choice now. Will you... 1. Go out and attempt to save the town?. 2. Go back to sleep...\n");
-        scanf_s("%d", &choice1);
+        scanf_s("%i", &choice1);
         system("cls");
+
+        // Used to stop infinite loop when char input into scanf_s
+        char* str = fgets(buffer, sizeof(buffer), stdin);
+        if (str == NULL) { /* error - handle it */ }
 
         if (choice1 == 1) // Choice that allows user to break from this loop to continue story
         {
@@ -208,26 +205,283 @@ void choice1loop(void)
         }
     }
 }
-
-// Union for "money" used in loop
-union Money { 
-    int coins; 
-    int jobs; 
-    int intelligence; 
-} money; 
-
-int main(void)
+void choice2loop(void)
 {
-    char fn[100], dn[100]; // Character array to hold a users first name & dungeon name
-    char buffer[1024]; // Char buffer for loops
-    int choice2, choice3, choice4, choiceexit = 0; // Story choices 
-    int _getch(); // return no error call for _getch
+    for (;;)
+    {
+
+        int choice2 = 0;
+        char buffer[1024];
+        int _getch();
+
+        //choice area, 1 to continue onward, 2 to fail and retry choice, anything else to error.
+        printf("\nQuickly thinking. You: 1. Try to attack the Goblin! 2. Run away from the Goblin... 3. Cower in fear... \n");
+        scanf_s("%d", &choice2);
+        system("cls");
+
+        // Used to stop infinite loop when char input into scanf_s
+        char* str = fgets(buffer, sizeof(buffer), stdin);
+        if (str == NULL) { /* error - handle it */ }
+
+        if (choice2 == 1) // Choice that allows user to break from this loop to continue story
+        {
+            printf("\nYou draw your trusty sword and shield and get into defensive position\n");
+            printf("\nThe Goblin attempts to get the first attack and swings with all of its might down upon your shield!\n");
+            printf("\nYou block the powerful attack and counter with one of your own. You have trained your whole life for moments like these.\n");
+            printf("\nDeflecting the attack, you knock the Goblins sword clear of its hand. Seeing the opportunity, you strike!\n");
+            printf("\nAnd just like every other monster you have ever slain, you thrust your sword deep into the heart of the monster...\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            //ASCII art using puts()
+            asciitreasure();
+
+            printf("\nYou have defeated the Goblin!!! ***Victory fanfare***\n");
+            printf("\nYou have earned the Goblins treasure that it has left behind!!!\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nUpon further inspection, you notice that the coins in the chest are all soft...\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nYou take a bite into the coin to test it, and your teeth sink into the coin.\n");
+            printf("\nFor some reason it tastes alot like chocolate......\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+            break;
+        }
+
+        else if (choice2 == 2) // Choice that allows user to break from this loop to continue story
+        {
+            printf("\nYou are able to successfully run away from the Goblin! But at what cost?\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+            break;
+        }
+
+        else if (choice2 == 3) // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nYou cower in fear as the Goblin is free to strike you with his sword and you have died...\n");
+            printf("\nYou have failed. Hit any key to return to last choice.\n");
+            _getch();
+            system("cls");
+        }
+        else  // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nNot a valid choice, try again\n");
+            _getch();
+            system("cls");
+        }
+    }
+}
+void choice3loop(void)
+{
+
+    union Money {
+        int coins;
+        int jobs;
+        int intelligence;
+    } money;
+
     money.coins = 0; // for use in money union 
-    money.jobs = 0; // for use in money union 
-    money.intelligence = 0; // for use in money union 
+
+
+    for (;;)
+    {
+        int choice3 = 0;
+        char buffer[1024];
+        int _getch();
+
+        //ASCII art using puts()
+        asciiskull();
+
+        printf("\nYou see a skull shaped switch that may belong to this suspicious gate.\n\nIt looks like you can insert a coin into the mouth.\n\nDo you 1. Try to Insert coin? 2. Ignore the switch?\n");
+        scanf_s("%d", &choice3);
+        system("cls");
+
+        // Used to stop infinite loop when char input into scanf_s
+        char* str = fgets(buffer, sizeof(buffer), stdin);
+        if (str == NULL) { /* error - handle it */ }
+
+        if (choice3 == 1) // Choice that forces user to restart from beginning of this loop, use of union
+        {
+            printf("\nYou approach the switch with intent to insert a coin, but the skull speaks to you. \n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nSkull: I can see inside your mind. You will not be able to open this door because I know that you have no money! \n");
+            printf("\nSkull: I will now tell you about yourself! \n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nSkull: The amount of money that you have is %d! \n", money.coins);
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nSkull: This is because the amount of jobs that you have had in your life amounts to %d! \n", money.jobs);
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nSkull: And this is because the total IQ that you have in that skull of yours is %d! \n", money.intelligence);
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nNow give me real coins to open this door, or SCRAM!!! \n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+        }
+
+        else if (choice3 == 2) // Choice that allows user to break from this loop to continue story
+        {
+            printf("\nYou decide to ignore the suspicious switch and carry on through the open doorway \n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+            break;
+        }
+
+        else // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nNot a valid choice, try again\n");
+            _getch();
+            system("cls");
+        }
+    }
+}
+void choice4loop(void)
+{
+    for (;;)
+    {
+
+        int choice4 = 0;
+        char buffer[1024];
+        int _getch();
+
+        printf("\nThis is the final choice!! Do you... 1. Attack the faceless being head on? 2. Hide and try to sneak attack the being? 3. Sneakily search the room for an advantage.\n");
+        scanf_s("%d", &choice4);
+        system("cls");
+
+        // Used to stop infinite loop when char input into scanf_s
+        char* str = fgets(buffer, sizeof(buffer), stdin);
+        if (str == NULL) { /* error - handle it */ }
+
+        if (choice4 == 1) // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nYou scream at the top of your lungs and catch the beings attention as you rush haphazardly at full speed.\n");
+            printf("\nThe being does not react as you close the distance.\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\n10 meters...\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\n5 meters...\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nAs you are almost within arms length of the faceless figure, its arm outstretches in your direction.\n");
+            printf("\nA whirlwind of darkness surrounds you as you go blind.\n");
+            printf("\nAll feeling in your body has disappeared and you can no longer tell where you are...\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nThe being has destroyed your soul. You have failed. Hit any key to return to last choice.\n");
+            _getch();
+            system("cls");
+
+        }
+
+        else if (choice4 == 2) // Choice that allows user to break from this loop to continue story
+        {
+            printf("\nYou decide to try and be sneaky as you hug the edges of the walls and make your way closer to the being.\n");
+            printf("\nDirectly behind the throne now, with now way of the being seeing you, you attempt to close the distance.\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\n10 Meters...\n");
+            printf("\n5 Meters...\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nTouching the back of the throne now, you unsheathe your sword very slowly and silently. The being still has not noticed you.\n");
+            printf("\nVery carefully, you point your sword towards the back of the throne.\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nThrusting with the might of the gods, you jam your sword into the back of the throne, hoping that it penetrates.\n");
+            printf("\nRelief washes over you as the sword slides cleanly through the back lining of the throne into the back of the faceless creature.\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            break;
+        }
+
+        else if (choice4 == 3) // Choice that allows user to break from this loop to continue story
+        {
+            printf("\nLooking around the environment, a bright object catches your eye.\n");
+            printf("\nCarefully, you make your way towards the bright ball of light.\n");
+            printf("\nCan it be???\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            //ASCII art using puts()
+            ascii8ball();
+
+            printf("\nThe magical 8 ball of destiny!!!\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+
+            printf("\nAs if the 8 ball of destiny was speaking to you...\n");
+            printf("\nIt tells you to throw it at the faceless being sittng in the throne.\n");
+            printf("\nDoing exactly that, you maintain your distance as you lob the 8 ball of destiny towards the throne.\n");
+            printf("\nPress any key to Continue...\n");
+            _getch();
+            system("cls");
+            break;
+        }
+
+        else // Choice that forces user to restart from beginning of this loop
+        {
+            printf("\nNot a valid choice, try again\n");
+            _getch();
+            system("cls");
+        }
+    }
+}
+
+int main()
+{
+    char fn[64], dn[64]; // Character array to hold a users first name & dungeon name
+    char buffer[1024]; // buffer for char to stop inf loop 
+    int choiceexit = 0; // Initializing final choice to 0
+    int _getch(); // return no error call for _getch
+    int extradata = 0; // Initializing for error checking in Player / dungeon name input
 
     // Usage of struct to display time at beginning of story
-    time_t s, val = 1; 
+    time_t s; 
     struct tm* current_time; // tm struct for time display
     s = time(NULL); 
     current_time = localtime(&s); 
@@ -237,11 +491,48 @@ int main(void)
     {
         // Prompt from stdin for a users name
         printf(PROMPT_MSG);
-        scanf_s("%s", fn, 100); // First name input 
+
+        // If fgets has no more to read or if there is an error
+        fn[sizeof fn - 1] = 'x';
+        if (fgets(fn, 64, stdin) == NULL)
+        {
+            return 0; 
+        }
+
+        // If extra characters or int input, get rid of extra input after buffer size reached
+        if (fn[sizeof fn - 1] == '\0' && fn[sizeof fn - 2] != '\n')
+        {
+            int ch;
+            while ((ch = fgetc(stdin)) != '\n' && ch != EOF)
+            {
+                extradata = 1;
+            }
+        }
+
+        // Remove trailing newline after fgets for player name
+        fn[strcspn(fn, "\n")] = 0;
 
         // Prompt from stdin for the dungeon name and clear screen after both user input
         printf(PROMPT_MSGD);
-        scanf_s("%s", dn, 100); // Dungeon name input 
+
+        // No more to read or IO error
+        dn[sizeof dn - 1] = 'x';
+        if (fgets(dn, 64, stdin) == NULL) {
+            break;
+        }
+
+        // If extra characters or int input, get rid of after 64 buffer length for dungeon name
+        if (dn[sizeof dn - 1] == '\0' && dn[sizeof dn - 2] != '\n')
+        {
+            int ch;
+            while ((ch = fgetc(stdin)) != '\n' && ch != EOF)
+            {
+                extradata = 1;
+            }
+        }
+
+        // Remove trailing newline after fgets for dungeon name
+        dn[strcspn(dn, "\n")] = 0;
 
         // Waits for user input to continue and then clears the screen
         printf("\nPress any key to Continue...\n");
@@ -262,15 +553,15 @@ int main(void)
         system("cls");
 
         // Print the users name using stdout & Basic dialogue with the dungeon name. Wait for user input to continue.
-        printf("\nZylo: Wake up!!! the town alarm is going off and we need your help %s!\n", fn);
-        printf("\nZylo: The dungeon %s just outside the town is being overrun by monsters and they are starting to come into the city now!\n", dn);
-        printf("\nZylo: We need your help to stop them... Please grab your weapon and get to the front of %s as soon as possible!\n", dn);
+        printf("\nZylo: Wake up!!! the town alarm is going off and we need your help %s\n", fn);
+        printf("\nZylo: The dungeon just outside the town is being overrun by monsters and they are starting to come into the city now!\n");
+        printf("\nZylo: We need your help to stop them... Please grab your weapon and get to the front of the dungeon %s\n", dn);
         printf("\nPress any key to Continue...\n");
         _getch();
         system("cls");
 
         //ASCII art using puts()
-        ascii1();
+        asciigear();
 
         printf("\nYou gather the needed equipment... Your trusty hildebrand sword and custom fitted ironwood shield.\n");
         printf("\nAs you exit your house, you hear the deafening screams of the townsfolk and the blaring alarm.\n");
@@ -287,7 +578,7 @@ int main(void)
         _getch();
         system("cls");
 
-        printf("\nYou quickly sprint through the chaotic scene of fire and destruction that lay about to the front of the dungeon %s.\n", dn);
+        printf("\nYou quickly sprint through the chaotic scene of fire and destruction that lay about to the front of the dungeon %s\n", dn);
         printf("\nYou see hordes of monsters pouring out of the dungeon, looking for an alternative entrance, you notice a path around the back of the cave.\n");
         printf("\nSuccess! A small hole in the side of the cave leading even deeper in! You wiggle your way into the cracks and have successfully entered the dungeon without getting noticed by the monsters outside.\n");
         printf("\nPress any key to Continue...\n");
@@ -306,11 +597,11 @@ int main(void)
         system("cls");
 
         //ASCII art using puts()
-        ascii2();
+        asciimonster();
 
         printf("\nThe faceless creature peers down the dimly lit cave, looking for what may have startled it.\n");
         printf("\nYou get shivers up your spine from the sheer site of this unknown being, and you begin to question your motives.\n");
-        printf("\n'You are the one and only %s!!! You have slayed countless beasts and defended the city before...' you tell yourself.\n", fn);
+        printf("\n'You are the one and only hero! You have slayed countless beasts and defended the city before...' you tell yourself.\n");
         printf("\nBut this creature is like no other that you have ever seen and you begin feel the pit of your stomach sinking further.\n");
         printf("\nPress any key to Continue...\n");
         _getch();
@@ -328,77 +619,7 @@ int main(void)
         system("cls");
 
         // Loop to require user input to pick between choices presented. Other input not allowed.
-        for (;;)
-        {
-            // Used to stop infinite loop when char input into scanf_s
-            char* str = fgets(buffer, sizeof(buffer), stdin);
-            if (str == NULL) { /* error - handle it */ }
-
-            char* end;
-            long num = strtol(str, &end, 10);
-            if (str == end) { /* error - handle it */ }
-
-            //choice area, 1 to continue onward, 2 to fail and retry choice, anything else to error.
-            printf("\nQuickly thinking. You: 1. Try to attack the Goblin! 2. Run away from the Goblin... 3. Cower in fear... \n");
-            scanf_s("%d", &choice2);
-            system("cls");
-
-            if (choice2 == 1) // Choice that allows user to break from this loop to continue story
-            {
-                printf("\nYou draw your trusty sword and shield and get into defensive position\n");
-                printf("\nThe Goblin attempts to get the first attack and swings with all of its might down upon your shield!\n");
-                printf("\nYou block the powerful attack and counter with one of your own. You have trained your whole life for moments like these.\n");
-                printf("\nDeflecting the attack, you knock the Goblins sword clear of its hand. Seeing the opportunity, you strike!\n");
-                printf("\nAnd just like every other monster you have ever slain, you thrust your sword deep into the heart of the monster...\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                //ASCII art using puts()
-                ascii3();
-
-                printf("\nYou have defeated the Goblin!!! ***Victory fanfare***\n");
-                printf("\nYou have earned the Goblins treasure that it has left behind!!!\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nUpon further inspection, you notice that the coins in the chest are all soft...\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nYou take a bite into the coin to test it, and your teeth sink into the coin.\n");
-                printf("\nFor some reason it tastes alot like chocolate......\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-                break;
-            }
-
-            else if (choice2 == 2) // Choice that allows user to break from this loop to continue story
-            {
-                printf("\nYou are able to successfully run away from the Goblin! But at what cost?\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-                break;
-            }
-
-            else if (choice2 == 3) // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nYou cower in fear as the Goblin is free to strike you with his sword and you have died...\n");
-                printf("\nYou have failed. Hit any key to return to last choice.\n");
-                _getch();
-                system("cls");
-            }
-            else  // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nNot a valid choice, try again\n");
-                _getch();
-                system("cls");
-            }
-        }
+        choice2loop();
 
         //further dialogue pushing the story forward
         printf("\nYou quickly make your way down the dungeon in pursuit of the faceless creature that you saw before you.\n");
@@ -408,74 +629,7 @@ int main(void)
         system("cls");
 
         // Loop to require user input to pick between choices presented. Other input not allowed.
-        for (;;)
-        {
-            // Used to stop infinite loop when char input into scanf_s
-            char* str = fgets(buffer, sizeof(buffer), stdin);
-            if (str == NULL) { /* error - handle it */ }
-
-            char* end;
-            long num = strtol(str, &end, 10);
-            if (str == end) { /* error - handle it */ }
-
-            //ASCII art using puts()
-            ascii4();
-
-
-            printf("\nYou see a skull shaped switch that may belong to this suspicious gate.\n\nIt looks like you can insert a coin into the mouth.\n\nDo you 1. Try to Insert coin? 2. Ignore the switch?\n");
-            scanf_s("%d", &choice3);
-            system("cls");
-
-            if (choice3 == 1) // Choice that forces user to restart from beginning of this loop, use of union
-            {
-                printf("\nYou approach the switch with intent to insert a coin, but the skull speaks to you. \n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nSkull: I can see inside your mind. You will not be able to open this door because I know that you have no money! \n");
-                printf("\nSkull: I will now tell you about yourself! \n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nSkull: The amount of money that you have is %d! \n", money.coins);
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nSkull: This is because the amount of jobs that you have had in your life amounts to %d! \n", money.jobs);
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nSkull: And this is because the total IQ that you have in that skull of yours is %d! \n", money.intelligence);
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nNow give me real coins to open this door, or SCRAM!!! \n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-            }
-
-            else if (choice3 == 2) // Choice that allows user to break from this loop to continue story
-            {
-                printf("\nYou decide to ignore the suspicious switch and carry on through the open doorway \n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-                break;
-            }
-
-            else // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nNot a valid choice, try again\n");
-                _getch();
-                system("cls");
-            }
-        }
+        choice3loop();
 
         //further dialogue pushing the story forward
         printf("\nYou continue onward in the dungeon. After countless hours of navigating the dungeon, you finally arrive at a vastly open space within the dungeon.\n");
@@ -485,116 +639,10 @@ int main(void)
         system("cls");
 
         // Loop to require user input to pick between choices presented. Other input not allowed.
-        for (;;)
-        {
-            // Used to stop infinite loop when char input into scanf_s
-            char* str = fgets(buffer, sizeof(buffer), stdin);
-            if (str == NULL) { /* error - handle it */ }
-
-            char* end;
-            long num = strtol(str, &end, 10);
-            if (str == end) { /* error - handle it */ }
-
-            printf("\nThe is the final choice %s! Do you... 1. Attack the faceless being head on? 2. Hide and try to sneak attack the being? 3. Sneakily search the room for an advantage.\n", fn);
-            scanf_s("%d", &choice4);
-            system("cls");
-
-            if (choice4 == 1) // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nYou scream at the top of your lungs and catch the beings attention as you rush haphazardly at full speed.\n");
-                printf("\nThe being does not react as you close the distance.\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\n10 meters...\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\n5 meters...\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nAs you are almost within arms length of the faceless figure, its arm outstretches in your direction.\n");
-                printf("\nA whirlwind of darkness surrounds you as you go blind.\n");
-                printf("\nAll feeling in your body has disappeared and you can no longer tell where you are...\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nThe being has destroyed your soul. You have failed. Hit any key to return to last choice.\n");
-                _getch();
-                system("cls");
-
-            }
-
-            else if (choice4 == 2) // Choice that allows user to break from this loop to continue story
-            {
-                printf("\nYou decide to try and be sneaky as you hug the edges of the walls and make your way closer to the being.\n");
-                printf("\nDirectly behind the throne now, with now way of the being seeing you, you attempt to close the distance.\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\n10 Meters...\n");
-                printf("\n5 Meters...\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nTouching the back of the throne now, you unsheathe your sword very slowly and silently. The being still has not noticed you.\n");
-                printf("\nVery carefully, you point your sword towards the back of the throne.\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nThrusting with the might of the gods, you jam your sword into the back of the throne, hoping that it penetrates.\n");
-                printf("\nRelief washes over you as the sword slides cleanly through the back lining of the throne into the back of the faceless creature.\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                break;
-            }
-
-            else if (choice4 == 3) // Choice that allows user to break from this loop to continue story
-            {
-                printf("\nLooking around the environment, a bright object catches your eye.\n");
-                printf("\nCarefully, you make your way towards the bright ball of light.\n");
-                printf("\nCan it be???\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                //ASCII art using puts()
-                ascii5();
-
-                printf("\nThe magical 8 ball of destiny!!!\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-
-                printf("\nAs if the 8 ball of destiny was speaking to you...\n");
-                printf("\nIt tells you to throw it at the faceless being sittng in the throne.\n");
-                printf("\nDoing exactly that, you maintain your distance as you lob the 8 ball of destiny towards the throne.\n");
-                printf("\nPress any key to Continue...\n");
-                _getch();
-                system("cls");
-                break;
-            }
-
-            else // Choice that forces user to restart from beginning of this loop
-            {
-                printf("\nNot a valid choice, try again\n");
-                _getch();
-                system("cls");
-            }
-        }
+        choice4loop();
 
         //ASCII art using puts()
-        ascii6();
+        asciiexplosion();
 
         // Final dialogue section
         printf("\nThe throne bursts into a shadowey ball of flame as it envelopes the entire room.\n");
@@ -640,23 +688,20 @@ int main(void)
         system("cls");
 
         //ASCII art using puts()
-        ascii7();
+        asciicongrats();
 
         // Loop to require user input to pick between choices presented. Other input not allowed.
         for (;;)
         {
+
+            printf("\nEnd of the road!\n");
+            printf("\nType 1 to restart. 2 to quit. 3 to load extra content\n");
+            scanf_s("%d", &choiceexit);
+            system("cls");
+
             // Used to stop infinite loop when char input into scanf_s
             char* str = fgets(buffer, sizeof(buffer), stdin);
             if (str == NULL) { /* error - handle it */ }
-
-            char* end;
-            long num = strtol(str, &end, 10);
-            if (str == end) { /* error - handle it */ }
-
-            printf("\nEnd of the road %s!\n", fn);
-            printf("\nType 1 to restart. 2 to quit.\n");
-            scanf_s("%d", &choiceexit);
-            system("cls");
 
             // Restarts full loop and sends player back to beginning of program
             if (choiceexit == 1)
@@ -669,12 +714,37 @@ int main(void)
             {
                 return 0;
             }
+            // Choice to execute file I/O for extra content at end of program
+            if (choiceexit == 3)
+            {
+                FILE* fp;
+                char buff[255];
+
+                fp = fopen("dlc.txt", "r");
+                if (fp == NULL)
+                {
+                    printf("\nError while opening file\n");
+                    printf("\nPress any key to Continue...\n");
+                    _getch();
+                    system("cls");
+                    return 0;
+                }
+
+                fgets(buff, 255, (FILE*)fp);
+                printf("3: %s\n", buff);
+                fclose(fp);
+
+                printf("\nPress any key to redo choice..\n");
+                _getch();
+                system("cls");
+            }
 
             else // Choice that forces user to restart from beginning of this loop
             {
                 printf("\nNot a valid choice, try again\n");
                 _getch();
                 system("cls");
+
             }
         }
     }
