@@ -498,6 +498,27 @@ void readfile(void)
     _getche();
     system("cls");
 }
+void writefile(void)
+{
+    int _getche();
+    errno_t err;
+    FILE* fp;
+
+    // Open file to write, if file does not exist, it will be created
+    err = fopen_s(&fp, "dlc.txt", "w");
+    fprintf(fp, "Hello! You have found the secret hidden file at the end of my project!!! Well I guess it wasnt that hidden... Anyways, congradulations for reaching this point!! \n");
+
+    if (fp == NULL) // If file cannot be opened, throw null error
+    {
+        printf("\nError while opening file\n");
+        printf("\nPress any key to Continue...\n");
+        _getche();
+        system("cls");
+        fclose(fp); //close the file
+    }
+
+    fclose(fp); //close the file
+}
 int main()
 {
     char fn[65]; // Character array to hold a users first name 
@@ -746,6 +767,7 @@ int main()
             // Choice to execute file I/O for extra content at end of program
             else if (choiceexit == 3)
             {
+                writefile();
                 readfile();
             }
 
