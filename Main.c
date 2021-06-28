@@ -481,7 +481,7 @@ void readfile(void)
 
     // open file, if file contents are null, throw error
     err = fopen_s(&fp, "dlc.txt", "r");
-    if (!err && fp!=NULL)
+    if (fp == NULL)
     {
         printf("\nError while opening file\n");
         printf("\nPress any key to Continue...\n");
