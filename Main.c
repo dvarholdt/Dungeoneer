@@ -722,7 +722,6 @@ int main()
         // Loop to require user input to pick between choices presented. Other input not allowed.
         for (;;)
         {
-
             printf("\nEnd of the road!\n");
             printf("\nType 1 to restart. 2 to quit. 3 to load extra content\n");
             scanf_s("%d", &choiceexit);
